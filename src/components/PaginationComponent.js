@@ -8,14 +8,11 @@ function DefaultColumnFilter({
     column: { filterValue, preFilteredRows, setFilter },
 }) {
     const count = preFilteredRows.length
-
     return (
         <input
             className="form-control"
             value={filterValue || ''}
             onChange={e => {
-                e.preventDefault();
-            
                 setFilter(e.target.value || undefined)
             }}
             placeholder={`Search  records...`}
@@ -33,12 +30,11 @@ function Table({ columns, data }) {
         []
     )
 
-    // Use the state and functions returned from useTable to build your UI
+    // Use the state and functions returned from useTable to build  UI
     const {
         getTableProps,
         getTableBodyProps,
         headerGroups,
-        rows,
         prepareRow,
         page,
         canPreviousPage,
@@ -72,14 +68,15 @@ function Table({ columns, data }) {
                         <tr {...headerGroup.getHeaderGroupProps()} id="table tr ">
                             {headerGroup.headers.map(column => (
                                 <th {...column.getHeaderProps(column.getSortByToggleProps())} id="table th">{column.render('Header')}
-                                
-                                <span>
+                                {/*Adding sorting functionality using useSortBy */}
+                                   <span>
                                         {column.isSorted
                                             ? column.isSortedDesc
                                                 ? ' 🔽'
                                                 : ' 🔼'
                                             : ''}
                                     </span>
+                                    {/* Adding filter funtionality to each Column, using useFilter hook from react-table*/ }
                                     <div>{column.canFilter ? column.render('Filter') : null}</div>
                                 </th>
 
@@ -101,9 +98,8 @@ function Table({ columns, data }) {
                 </tbody>
             </table>
             {/* 
-        Pagination can be built however you'd like. 
-        This is just a very basic UI implementation:
-      */}
+           Pagination is implemented using usePagination hook from react-table
+            */}
             <div className="pagination">
                 <button className="page-item" onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
                     <a className="page-link">First</a>
