@@ -11,7 +11,6 @@ Once inside the folder in terminal, type the below command in the terminal to in
 To start the front end application,type
 #### npm start
 **Please make sure backend is up and running before starting the front end application.
-Once springboot application is started, make sure to enter http://localhost:8080/ in the web browser to begin scraping,else data wont display on front end**
 To view the front end data, go to
        http://localhost:3000 
 
